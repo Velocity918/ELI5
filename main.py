@@ -2,9 +2,6 @@ from dotenv import load_dotenv
 import os
 
 user_request = input()
-
-
-
 load_dotenv()
 
 api_key = os.getenv("API_KEY")
@@ -20,6 +17,10 @@ client = OpenRouter(
 response = client.chat.send(
     model="openai/gpt-5-mini",
     messages=[
+        {"role": "system", "content": "You must follow all the rules:\n"
+                                    "1) You have explain what ever the user ask as if he is 5 years old\n"
+                                    "2) maximum word limit 150\n"
+                                    "3)Absolutely no Jargon"}, 
         {"role": "user", "content": user_request}
     ],
 )
